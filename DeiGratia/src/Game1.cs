@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace DeiGratia
+namespace DeiGratia.src
 {
     public class Game1 : Game
     {
