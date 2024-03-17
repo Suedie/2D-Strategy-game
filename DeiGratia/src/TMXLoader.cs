@@ -9,28 +9,42 @@ using System.Xml;
 
 namespace DeiGratia.src
 {
-    internal class TMXLoader
+    internal class TmxLoader
     {
         private XmlDocument tmxFile = new XmlDocument();
         private TileMap tileMap;
         private string filepath;
 
-        public TMXLoader(string filepath)
+        public TmxLoader()
+        {
+
+        }
+        public TmxLoader(string filepath)
         {
             this.filepath = filepath;
             LoadMap(filepath);
         }
 
+        //Converts a .tmx map into a C# object
         public void LoadMap(string filepath)
         {
-            List<TileMapLayer> tileMapLayers = new List<TileMapLayer>();
-            List<TileSet> tileSets = new List<TileSet>();
-
             tmxFile.Load(filepath);
             XmlNodeList layerNodes = tmxFile.GetElementsByTagName("layer");
             XmlNodeList tileSetNodes = tmxFile.GetElementsByTagName("tileset");
 
-            foreach (XmlNode layerNode in layerNodes )
+            List<TileMapLayer> tileMapLayers = tileMapLayerLoader(layerNodes);
+            List<TileSet> tileSets = tileSetLoader(tileSetNodes);
+
+            //Fix it so it fetches infinite from the tilemap file
+            tileMap = new TileMap(tileSets, tileMapLayers, 0);
+        }
+
+        //Helper function that loads every layer in a tilemap and returns them in a list.
+        private List<TileMapLayer> tileMapLayerLoader(XmlNodeList layerNodes)
+        {
+            List<TileMapLayer> tileMapLayers = new List<TileMapLayer>();
+
+            foreach (XmlNode layerNode in layerNodes)
             {
                 int id = -1;
                 string layerName = "";
@@ -39,7 +53,7 @@ namespace DeiGratia.src
 
                 XmlAttributeCollection layerAttributes = layerNode.Attributes;
 
-                foreach (XmlAttribute layerAttribute in layerAttributes )
+                foreach (XmlAttribute layerAttribute in layerAttributes)
                 {
                     switch (layerAttribute.Name)
                     {
@@ -61,7 +75,8 @@ namespace DeiGratia.src
                 string[] tileString = layerNode.FirstChild.InnerText.Split(",");
                 int[] tiles = new int[tileString.Length];
 
-                for (int i = 0; i < tileString.Length; i++) {
+                for (int i = 0; i < tileString.Length; i++)
+                {
 
                     tiles[i] = Int32.Parse(tileString[i]);
 
@@ -71,18 +86,27 @@ namespace DeiGratia.src
                 tileMapLayers.Add(tileMapLayer);
             }
 
-            foreach (XmlNode tileSetNode  in tileSetNodes)
+            return tileMapLayers;
+
+        }
+
+        //Helper function that loads every tileset from a tilemap and returns them in a list.
+        private List<TileSet> tileSetLoader(XmlNodeList tileSetNodes)
+        {
+            List<TileSet> tileSets = new List<TileSet>();
+
+            foreach (XmlNode tileSetNode in tileSetNodes)
             {
                 int firstgid = -1;
                 string name = "";
-                int tileWidth = 0;
-                int tileHeight = 0;
-                int tileCount = 0;
-                int columns = 0;
+                int tileWidth = -1;
+                int tileHeight = -1;
+                int tileCount = -1;
+                int columns = -1;
 
                 string source = "";
-                int height = 0;
-                int width = 0;
+                int height = -1;
+                int width = -1;
 
                 XmlAttributeCollection tileSetAttributes = tileSetNode.Attributes;
 
@@ -134,8 +158,9 @@ namespace DeiGratia.src
 
             }
 
-            //Fix it so it fetches infinite from the tilemap file
-            tileMap = new TileMap(tileSets, tileMapLayers, 0);
+            return tileSets;
+
         }
+
     }
 }
