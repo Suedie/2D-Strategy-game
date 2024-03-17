@@ -12,14 +12,11 @@ namespace DeiGratia.src
         private List<TileMapLayer> tileMapLayers { get; set; }
         private bool infinite;
 
-        public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, int infinite)
+        public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, bool infinite)
         {
             this.tileSets = tileSets;
             this.tileMapLayers = tileMapLayers;
-            if (infinite == 0)
-                this.infinite = false;
-            else if (infinite == 1)
-                this.infinite = true;
+            this.infinite = infinite;
         }
     }
 }

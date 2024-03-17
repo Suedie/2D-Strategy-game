@@ -31,12 +31,26 @@ namespace DeiGratia.src
             tmxFile.Load(filepath);
             XmlNodeList layerNodes = tmxFile.GetElementsByTagName("layer");
             XmlNodeList tileSetNodes = tmxFile.GetElementsByTagName("tileset");
+            XmlAttributeCollection mapAttributes = tmxFile.GetElementsByTagName("map").Item(0).Attributes;
+
+            bool isInfinite = false;
+
+            foreach (XmlAttribute mapAttribute in mapAttributes)
+            {
+                if (mapAttribute.Name == "infinite")
+                {
+                    int infiniteValue = int.Parse(mapAttribute.Value);
+                    if (infiniteValue == 1)
+                        isInfinite = true;
+                    else
+                        isInfinite = false;
+                }
+            }
 
             List<TileMapLayer> tileMapLayers = tileMapLayerLoader(layerNodes);
             List<TileSet> tileSets = tileSetLoader(tileSetNodes);
 
-            //Fix it so it fetches infinite from the tilemap file
-            tileMap = new TileMap(tileSets, tileMapLayers, 0);
+            tileMap = new TileMap(tileSets, tileMapLayers, isInfinite);
         }
 
         //Helper function that loads every layer in a tilemap and returns them in a list.
