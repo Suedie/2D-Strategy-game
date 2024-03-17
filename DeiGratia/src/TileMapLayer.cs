@@ -13,9 +13,9 @@ namespace DeiGratia.src
         private int width;
         private int height;
 
-        private List<Tile> tiles;
+        private int[] tiles;
 
-        public TileMapLayer(int id, string layerName, int width, int height, List<Tile> tiles)
+        public TileMapLayer(int id, string layerName, int width, int height, int[] tiles)
         {
             this.id = id;
             this.layerName = layerName;
