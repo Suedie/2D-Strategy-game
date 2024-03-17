@@ -12,7 +12,7 @@ namespace DeiGratia.src
     internal class TMXLoader
     {
         private XmlDocument tmxFile = new XmlDocument();
-        private TileMap tilemap;
+        private TileMap tileMap;
         private string filepath;
 
         public TMXLoader(string filepath)
@@ -39,21 +39,21 @@ namespace DeiGratia.src
 
                 XmlAttributeCollection layerAttributes = layerNode.Attributes;
 
-                foreach (XmlAttribute layerAttr in layerAttributes )
+                foreach (XmlAttribute layerAttribute in layerAttributes )
                 {
-                    switch (layerAttr.Name)
+                    switch (layerAttribute.Name)
                     {
                         case "id":
-                            id = Int32.Parse(layerAttr.Value);
+                            id = Int32.Parse(layerAttribute.Value);
                             break;
                         case "name":
-                            layerName = layerAttr.Value;
+                            layerName = layerAttribute.Value;
                             break;
                         case "width":
-                            width = Int32.Parse(layerAttr.Value);
+                            width = Int32.Parse(layerAttribute.Value);
                             break;
                         case "height":
-                            height = Int32.Parse(layerAttr.Value);
+                            height = Int32.Parse(layerAttribute.Value);
                             break;
                     }
                 }
@@ -70,8 +70,72 @@ namespace DeiGratia.src
                 TileMapLayer tileMapLayer = new TileMapLayer(id, layerName, width, height, tiles);
                 tileMapLayers.Add(tileMapLayer);
             }
-            
-        }
 
+            foreach (XmlNode tileSetNode  in tileSetNodes)
+            {
+                int firstgid = -1;
+                string name = "";
+                int tileWidth = 0;
+                int tileHeight = 0;
+                int tileCount = 0;
+                int columns = 0;
+
+                string source = "";
+                int height = 0;
+                int width = 0;
+
+                XmlAttributeCollection tileSetAttributes = tileSetNode.Attributes;
+
+                foreach (XmlNode tileSetAttribute in tileSetAttributes)
+                {
+                    switch (tileSetAttribute.Name)
+                    {
+                        case "firstgid":
+                            firstgid = Int32.Parse(tileSetAttribute.Value);
+                            break;
+                        case "name":
+                            name = tileSetAttribute.Value;
+                            break;
+                        case "tilewidth":
+                            tileWidth = Int32.Parse(tileSetAttribute.Value);
+                            break;
+                        case "tileheight":
+                            tileHeight = Int32.Parse(tileSetAttribute.Value);
+                            break;
+                        case "tilecount":
+                            tileCount = Int32.Parse(tileSetAttribute.Value);
+                            break;
+                        case "columns":
+                            columns = Int32.Parse(tileSetAttribute.Value);
+                            break;
+                    }
+                }
+
+                XmlAttributeCollection tileSetDataAttributes = tileSetNode.FirstChild.Attributes;
+
+                foreach (XmlNode tileSetData in tileSetDataAttributes)
+                {
+                    switch (tileSetData.Name)
+                    {
+                        case "source":
+                            source = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + tileSetData.Value;
+                            break;
+                        case "height":
+                            height = Int32.Parse(tileSetData.Value);
+                            break;
+                        case "width":
+                            width = Int32.Parse(tileSetData.Value);
+                            break;
+                    }
+                }
+
+                TileSet tileSet = new TileSet(firstgid, name, tileWidth, tileHeight, tileCount, columns, source, width, height);
+                tileSets.Add(tileSet);
+
+            }
+
+            //Fix it so it fetches infinite from the tilemap file
+            tileMap = new TileMap(tileSets, tileMapLayers, 0);
+        }
     }
 }
