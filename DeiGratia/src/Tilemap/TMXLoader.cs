@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace DeiGratia.src
+namespace DeiGratia.src.Tilemap
 {
     internal class TmxLoader
     {
@@ -21,7 +21,7 @@ namespace DeiGratia.src
         }
         public TmxLoader(string filepath)
         {
-            this.Filepath = filepath;
+            Filepath = filepath;
             LoadMap(filepath);
         }
 
@@ -76,16 +76,16 @@ namespace DeiGratia.src
                     switch (layerAttribute.Name)
                     {
                         case "id":
-                            id = Int32.Parse(layerAttribute.Value);
+                            id = int.Parse(layerAttribute.Value);
                             break;
                         case "name":
                             layerName = layerAttribute.Value;
                             break;
                         case "width":
-                            width = Int32.Parse(layerAttribute.Value);
+                            width = int.Parse(layerAttribute.Value);
                             break;
                         case "height":
-                            height = Int32.Parse(layerAttribute.Value);
+                            height = int.Parse(layerAttribute.Value);
                             break;
                     }
                 }
@@ -96,7 +96,7 @@ namespace DeiGratia.src
                 for (int i = 0; i < tileString.Length; i++)
                 {
 
-                    tiles[i] = Int32.Parse(tileString[i]);
+                    tiles[i] = int.Parse(tileString[i]);
 
                 }
 
@@ -133,22 +133,22 @@ namespace DeiGratia.src
                     switch (tileSetAttribute.Name)
                     {
                         case "firstgid":
-                            firstgid = Int32.Parse(tileSetAttribute.Value);
+                            firstgid = int.Parse(tileSetAttribute.Value);
                             break;
                         case "name":
                             name = tileSetAttribute.Value;
                             break;
                         case "tilewidth":
-                            tileWidth = Int32.Parse(tileSetAttribute.Value);
+                            tileWidth = int.Parse(tileSetAttribute.Value);
                             break;
                         case "tileheight":
-                            tileHeight = Int32.Parse(tileSetAttribute.Value);
+                            tileHeight = int.Parse(tileSetAttribute.Value);
                             break;
                         case "tilecount":
-                            tileCount = Int32.Parse(tileSetAttribute.Value);
+                            tileCount = int.Parse(tileSetAttribute.Value);
                             break;
                         case "columns":
-                            columns = Int32.Parse(tileSetAttribute.Value);
+                            columns = int.Parse(tileSetAttribute.Value);
                             break;
                     }
                 }
@@ -163,10 +163,10 @@ namespace DeiGratia.src
                             source = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + tileSetData.Value;
                             break;
                         case "height":
-                            height = Int32.Parse(tileSetData.Value);
+                            height = int.Parse(tileSetData.Value);
                             break;
                         case "width":
-                            width = Int32.Parse(tileSetData.Value);
+                            width = int.Parse(tileSetData.Value);
                             break;
                     }
                 }

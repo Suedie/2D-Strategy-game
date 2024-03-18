@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeiGratia.src
+namespace DeiGratia.src.Tilemap
 {
     internal class TileMap
     {

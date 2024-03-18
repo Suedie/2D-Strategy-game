@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeiGratia.src
+namespace DeiGratia.src.Tilemap
 {
     internal class TileMapRenderer
     {
@@ -48,11 +48,11 @@ namespace DeiGratia.src
         private void LoadTextures()
         {
             tileSets = map.TileSets;
-            tileTextures = new List<Texture2D> ();
+            tileTextures = new List<Texture2D>();
 
             foreach (TileSet tileSet in tileSets)
             {
-                Texture2D texture = this.content.Load<Texture2D>(tileSet.Name);
+                Texture2D texture = content.Load<Texture2D>(tileSet.Name);
                 tileTextures.Add(texture);
             }
 
@@ -65,10 +65,10 @@ namespace DeiGratia.src
 
             foreach (TileSet tileSet in tileSets)
             {
-                if (id >= tileSet.Firstgid && id <= (tileSet.Firstgid + tileSet.TileCount))
+                if (id >= tileSet.Firstgid && id <= tileSet.Firstgid + tileSet.TileCount)
                 {
-                    int srcY = ((id - tileSet.Firstgid) / (tileSet.Width / tileSet.TileWidth))* tileSet.TileHeight;
-                    int srcX = ((id - tileSet.Firstgid) % (tileSet.Width / tileSet.TileWidth)) * tileSet.TileWidth;
+                    int srcY = (id - tileSet.Firstgid) / (tileSet.Width / tileSet.TileWidth) * tileSet.TileHeight;
+                    int srcX = (id - tileSet.Firstgid) % (tileSet.Width / tileSet.TileWidth) * tileSet.TileWidth;
 
                     foreach (Texture2D texture in tileTextures)
                     {

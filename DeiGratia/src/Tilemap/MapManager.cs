@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Linq;
 
-namespace DeiGratia
+namespace DeiGratia.src.Tilemap
 {
     internal class MapManager
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeiGratia.src
+namespace DeiGratia.src.Tilemap
 {
     internal class TileMapLayer
     {
@@ -23,17 +23,17 @@ namespace DeiGratia.src
 
         public TileMapLayer(int id, string layerName, int width, int height, int[] tiles)
         {
-            this.Id = id;
-            this.LayerName = layerName;
-            this.Width = width;
-            this.Height = height;
-            this.Tiles = tiles;
+            Id = id;
+            LayerName = layerName;
+            Width = width;
+            Height = height;
+            Tiles = tiles;
         }
 
         public TileMapLayer(int id, string layerName)
         {
-            this.Id = id;
-            this.LayerName = layerName;
+            Id = id;
+            LayerName = layerName;
         }
     }
 }
