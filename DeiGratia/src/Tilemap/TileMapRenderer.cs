@@ -21,15 +21,14 @@ namespace DeiGratia.src.Tilemap
 
         public TileMapRenderer(TileMap map, SpriteBatch spriteBatch, ContentManager content)
         {
-            this.map = map;
             this.spriteBatch = spriteBatch;
             this.content = content;
+            LoadMap(map);
         }
 
 
         public void RenderMap()
         {
-            layers = map.TileMapLayers;
             LoadTextures();
             spriteBatch.Begin();
             foreach (TileMapLayer layer in layers)
@@ -79,6 +78,18 @@ namespace DeiGratia.src.Tilemap
                     }
                 }
             }
+        }
+
+        private void LoadMap(TileMap map)
+        {
+            this.map = map;
+            layers = map.TileMapLayers;
+            if (tileTextures != null)
+            {
+                foreach (Texture2D texture in tileTextures)
+                    texture.Dispose();
+            }
+            LoadTextures();
         }
     }
 }
