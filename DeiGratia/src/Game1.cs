@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System;
 using System.Diagnostics;
+using DeiGratia.src.Tilemap;
 
 namespace DeiGratia.src
 {
@@ -11,6 +12,9 @@ namespace DeiGratia.src
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private TmxLoader _loader;
+        TileMapRenderer tileMapRenderer;
 
         public Game1()
         {
@@ -23,12 +27,20 @@ namespace DeiGratia.src
         {
             // TODO: Add your initialization logic here
 
+            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2;
+            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
+            _graphics.ApplyChanges();
+
+            _loader = new TmxLoader();
+            _loader.LoadMap(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            tileMapRenderer = new TileMapRenderer(_loader.TileMap, _spriteBatch, this.Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -48,6 +60,8 @@ namespace DeiGratia.src
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            tileMapRenderer.RenderMap();
 
             base.Draw(gameTime);
         }
