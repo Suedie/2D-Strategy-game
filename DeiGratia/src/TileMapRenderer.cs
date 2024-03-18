@@ -67,7 +67,7 @@ namespace DeiGratia.src
             {
                 if (id >= tileSet.Firstgid && id <= (tileSet.Firstgid + tileSet.TileCount))
                 {
-                    int srcY = (id / (tileSet.Width / tileSet.TileWidth))* tileSet.TileHeight;
+                    int srcY = ((id - tileSet.Firstgid) / (tileSet.Width / tileSet.TileWidth))* tileSet.TileHeight;
                     int srcX = ((id - tileSet.Firstgid) % (tileSet.Width / tileSet.TileWidth)) * tileSet.TileWidth;
 
                     foreach (Texture2D texture in tileTextures)
