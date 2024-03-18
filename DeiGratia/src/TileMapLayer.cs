@@ -15,19 +15,25 @@ namespace DeiGratia.src
 
         private int[] tiles;
 
+        public int Id { get => id; set => id = value; }
+        public string LayerName { get => layerName; set => layerName = value; }
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
+        public int[] Tiles { get => tiles; set => tiles = value; }
+
         public TileMapLayer(int id, string layerName, int width, int height, int[] tiles)
         {
-            this.id = id;
-            this.layerName = layerName;
-            this.width = width;
-            this.height = height;
-            this.tiles = tiles;
+            this.Id = id;
+            this.LayerName = layerName;
+            this.Width = width;
+            this.Height = height;
+            this.Tiles = tiles;
         }
 
         public TileMapLayer(int id, string layerName)
         {
-            this.id = id;
-            this.layerName = layerName;
+            this.Id = id;
+            this.LayerName = layerName;
         }
     }
 }

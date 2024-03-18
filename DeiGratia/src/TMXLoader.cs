@@ -21,17 +21,21 @@ namespace DeiGratia.src
         }
         public TmxLoader(string filepath)
         {
-            this.filepath = filepath;
+            this.Filepath = filepath;
             LoadMap(filepath);
         }
+
+        public XmlDocument TmxFile { get => tmxFile; set => tmxFile = value; }
+        public string Filepath { get => filepath; set => filepath = value; }
+        internal TileMap TileMap { get => tileMap; set => tileMap = value; }
 
         //Converts a .tmx map into a C# object
         public void LoadMap(string filepath)
         {
-            tmxFile.Load(filepath);
-            XmlNodeList layerNodes = tmxFile.GetElementsByTagName("layer");
-            XmlNodeList tileSetNodes = tmxFile.GetElementsByTagName("tileset");
-            XmlAttributeCollection mapAttributes = tmxFile.GetElementsByTagName("map").Item(0).Attributes;
+            TmxFile.Load(filepath);
+            XmlNodeList layerNodes = TmxFile.GetElementsByTagName("layer");
+            XmlNodeList tileSetNodes = TmxFile.GetElementsByTagName("tileset");
+            XmlAttributeCollection mapAttributes = TmxFile.GetElementsByTagName("map").Item(0).Attributes;
 
             bool isInfinite = false;
 
@@ -47,14 +51,14 @@ namespace DeiGratia.src
                 }
             }
 
-            List<TileMapLayer> tileMapLayers = tileMapLayerLoader(layerNodes);
-            List<TileSet> tileSets = tileSetLoader(tileSetNodes);
+            List<TileMapLayer> tileMapLayers = TileMapLayerLoader(layerNodes);
+            List<TileSet> tileSets = TileSetLoader(tileSetNodes);
 
-            tileMap = new TileMap(tileSets, tileMapLayers, isInfinite);
+            TileMap = new TileMap(tileSets, tileMapLayers, isInfinite);
         }
 
         //Helper function that loads every layer in a tilemap and returns them in a list.
-        private List<TileMapLayer> tileMapLayerLoader(XmlNodeList layerNodes)
+        private List<TileMapLayer> TileMapLayerLoader(XmlNodeList layerNodes)
         {
             List<TileMapLayer> tileMapLayers = new List<TileMapLayer>();
 
@@ -105,7 +109,7 @@ namespace DeiGratia.src
         }
 
         //Helper function that loads every tileset from a tilemap and returns them in a list.
-        private List<TileSet> tileSetLoader(XmlNodeList tileSetNodes)
+        private List<TileSet> TileSetLoader(XmlNodeList tileSetNodes)
         {
             List<TileSet> tileSets = new List<TileSet>();
 

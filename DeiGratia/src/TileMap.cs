@@ -8,9 +8,21 @@ namespace DeiGratia.src
 {
     internal class TileMap
     {
-        private List<TileSet> tileSets {  get; set; }
-        private List<TileMapLayer> tileMapLayers { get; set; }
+        private List<TileSet> tileSets;
+        private List<TileMapLayer> tileMapLayers;
         private bool infinite;
+
+        public List<TileSet> TileSets
+        {
+            get { return tileSets; }
+        }
+
+        public List<TileMapLayer> TileMapLayers
+        {
+            get { return tileMapLayers; }
+        }
+
+
 
         public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, bool infinite)
         {
