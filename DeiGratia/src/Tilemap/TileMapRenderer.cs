@@ -30,7 +30,6 @@ namespace DeiGratia.src.Tilemap
         public void RenderMap()
         {
             LoadTextures();
-            spriteBatch.Begin();
             foreach (TileMapLayer layer in layers)
             {
                 int[] tiles = layer.Tiles;
@@ -39,7 +38,6 @@ namespace DeiGratia.src.Tilemap
                     DrawTile(tiles[i], i, layer.Width);
                 }
             }
-            spriteBatch.End();
 
 
         }

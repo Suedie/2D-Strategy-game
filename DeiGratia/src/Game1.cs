@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using System.Diagnostics;
 using DeiGratia.src.Tilemap;
+using DeiGratia.src.Camera;
 
 namespace DeiGratia.src
 {
@@ -12,6 +13,8 @@ namespace DeiGratia.src
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        Camera2D camera = new Camera2D();
 
         private TmxLoader _loader;
         TileMapRenderer tileMapRenderer;
@@ -30,6 +33,7 @@ namespace DeiGratia.src
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
             _graphics.ApplyChanges();
+
 
             _loader = new TmxLoader();
             _loader.LoadMap(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
@@ -52,6 +56,8 @@ namespace DeiGratia.src
 
             // TODO: Add your update logic here
 
+            camera.Position = new Vector2(320f, 320f);
+
             base.Update(gameTime);
         }
 
@@ -60,8 +66,9 @@ namespace DeiGratia.src
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.get_transformation(_graphics.GraphicsDevice));
             tileMapRenderer.RenderMap();
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
