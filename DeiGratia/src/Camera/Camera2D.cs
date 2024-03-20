@@ -22,6 +22,7 @@ namespace DeiGratia.src.Camera
             set { zoom = value; if (zoom < 0.1f) zoom = 0.1f; } // Negative zoom will flip image
         }
 
+        //Rotation will not be used in this project
         public float Rotation
         {
             get { return rotation; }

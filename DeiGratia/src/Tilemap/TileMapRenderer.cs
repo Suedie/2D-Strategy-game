@@ -72,6 +72,7 @@ namespace DeiGratia.src.Tilemap
                         if (texture.Name == tileSet.Name)
                         {
                             spriteBatch.Draw(texture, new Vector2(drawX * tileSet.TileWidth, drawY * tileSet.TileHeight), new Rectangle(srcX, srcY, tileSet.TileWidth, tileSet.TileHeight), Color.White);
+                            break;
                         }
                     }
                 }
