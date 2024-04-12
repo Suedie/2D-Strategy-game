@@ -12,25 +12,16 @@ namespace DeiGratia.src.Tilemap
     internal class TmxLoader
     {
         private XmlDocument tmxFile = new XmlDocument();
-        private TileMap tileMap;
-        private string filepath;
 
         public TmxLoader()
         {
 
         }
-        public TmxLoader(string filepath)
-        {
-            Filepath = filepath;
-            LoadMap(filepath);
-        }
 
         public XmlDocument TmxFile { get => tmxFile; set => tmxFile = value; }
-        public string Filepath { get => filepath; set => filepath = value; }
-        internal TileMap TileMap { get => tileMap; set => tileMap = value; }
 
         //Converts a .tmx map into a C# object
-        public void LoadMap(string filepath)
+        public TileMap LoadMap(string filepath)
         {
             TmxFile.Load(filepath);
             XmlNodeList layerNodes = TmxFile.GetElementsByTagName("layer");
@@ -54,7 +45,7 @@ namespace DeiGratia.src.Tilemap
             List<TileMapLayer> tileMapLayers = TileMapLayerLoader(layerNodes);
             List<TileSet> tileSets = TileSetLoader(tileSetNodes);
 
-            TileMap = new TileMap(tileSets, tileMapLayers, isInfinite);
+            return new TileMap(tileSets, tileMapLayers, isInfinite);
         }
 
         //Helper function that loads every layer in a tilemap and returns them in a list.

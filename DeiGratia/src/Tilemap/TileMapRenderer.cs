@@ -29,7 +29,6 @@ namespace DeiGratia.src.Tilemap
 
         public void RenderMap()
         {
-            LoadTextures();
             foreach (TileMapLayer layer in layers)
             {
                 int[] tiles = layer.Tiles;
