@@ -10,6 +10,10 @@ namespace DeiGratia.src.Tilemap
     {
         private List<TileSet> tileSets;
         private List<TileMapLayer> tileMapLayers;
+        private int width;
+        private int height;
+        private int tileWidth;
+        private int tileHeight;
         private bool infinite;
 
         public List<TileSet> TileSets
@@ -24,10 +28,14 @@ namespace DeiGratia.src.Tilemap
 
 
 
-        public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, bool infinite)
+        public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, int width, int height, int tileWidth, int tileHeight, bool infinite)
         {
             this.tileSets = tileSets;
             this.tileMapLayers = tileMapLayers;
+            this.width = width;
+            this.height = height;
+            this.tileWidth = tileWidth;
+            this.tileHeight = tileHeight;
             this.infinite = infinite;
         }
     }

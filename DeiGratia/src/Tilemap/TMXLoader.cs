@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace DeiGratia.src.Tilemap
@@ -28,11 +24,27 @@ namespace DeiGratia.src.Tilemap
             XmlNodeList tileSetNodes = TmxFile.GetElementsByTagName("tileset");
             XmlAttributeCollection mapAttributes = TmxFile.GetElementsByTagName("map").Item(0).Attributes;
 
+            int width = -1;
+            int height = -1;
+            int tileWidth = -1;
+            int tileHeight = -1;
             bool isInfinite = false;
 
             foreach (XmlAttribute mapAttribute in mapAttributes)
             {
-                if (mapAttribute.Name == "infinite")
+                if (mapAttribute.Name == "width")
+                {
+                    width = int.Parse(mapAttribute.Value);
+                } else if (mapAttribute.Name == "height")
+                {
+                    height = int.Parse(mapAttribute.Value);
+                } else if (mapAttribute.Name == "tileWidth")
+                {
+                    tileWidth = int.Parse(mapAttribute.Value);
+                } else if (mapAttribute.Name == "tileHeight")
+                {
+                    tileHeight = int.Parse(mapAttribute.Value);
+                } else if (mapAttribute.Name == "infinite")
                 {
                     int infiniteValue = int.Parse(mapAttribute.Value);
                     if (infiniteValue == 1)
@@ -45,7 +57,7 @@ namespace DeiGratia.src.Tilemap
             List<TileMapLayer> tileMapLayers = TileMapLayerLoader(layerNodes);
             List<TileSet> tileSets = TileSetLoader(tileSetNodes);
 
-            return new TileMap(tileSets, tileMapLayers, isInfinite);
+            return new TileMap(tileSets, tileMapLayers, width, height, tileWidth, tileHeight, isInfinite);
         }
 
         //Helper function that loads every layer in a tilemap and returns them in a list.
