@@ -26,17 +26,21 @@ namespace DeiGratia.src.Tilemap
             get { return tileMapLayers; }
         }
 
-
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
+        public int TileWidth { get => tileWidth; set => tileWidth = value; }
+        public int TileHeight { get => tileHeight; set => tileHeight = value; }
+        public bool Infinite { get => infinite; set => infinite = value; }
 
         public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, int width, int height, int tileWidth, int tileHeight, bool infinite)
         {
             this.tileSets = tileSets;
             this.tileMapLayers = tileMapLayers;
-            this.width = width;
-            this.height = height;
-            this.tileWidth = tileWidth;
-            this.tileHeight = tileHeight;
-            this.infinite = infinite;
+            this.Width = width;
+            this.Height = height;
+            this.TileWidth = tileWidth;
+            this.TileHeight = tileHeight;
+            this.Infinite = infinite;
         }
     }
 }
