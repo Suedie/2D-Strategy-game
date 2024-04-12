@@ -16,7 +16,7 @@ namespace DeiGratia.src
 
         Camera2D camera = new Camera2D();
 
-        private TileMap tileMap;
+        private MapManager mapManager;
         TileMapRenderer tileMapRenderer;
 
         public Game1()
@@ -34,9 +34,7 @@ namespace DeiGratia.src
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
             _graphics.ApplyChanges();
 
-
-            TmxLoader _loader = new TmxLoader();
-            tileMap = _loader.LoadMap(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
+            mapManager = new MapManager(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
 
             base.Initialize();
         }
@@ -44,7 +42,7 @@ namespace DeiGratia.src
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileMapRenderer = new TileMapRenderer(tileMap, _spriteBatch, this.Content);
+            tileMapRenderer = new TileMapRenderer(mapManager.Map, _spriteBatch, this.Content);
 
             // TODO: use this.Content to load your game content here
         }
