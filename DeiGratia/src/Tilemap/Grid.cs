@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeiGratia.src
+namespace DeiGratia.src.Tilemap
 {
     internal class Grid
     {
@@ -13,7 +13,7 @@ namespace DeiGratia.src
         private int tileWidth;
         private int tileHeight;
 
-        public Grid (int width, int height, int tileWidth, int tileHeight)
+        public Grid(int width, int height, int tileWidth, int tileHeight)
         {
             this.width = width;
             this.height = height;
@@ -21,14 +21,14 @@ namespace DeiGratia.src
             this.tileHeight = tileHeight;
         }
 
-        public int setX (int x)
+        public int setX(int x)
         {
             return x + tileWidth;
         }
 
-        public int setY (int y) 
+        public int setY(int y)
         {
-            return y + tileHeight; 
+            return y + tileHeight;
         }
     }
 }
