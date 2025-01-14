@@ -1,3 +1,3 @@
 ﻿
-using var game = new DeiGratia.Game1();
+using var game = new DeiGratia.src.Game1();
 game.Run();

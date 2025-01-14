@@ -1,13 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using System;
+using System.Diagnostics;
+using DeiGratia.src.Tilemap;
+using DeiGratia.src.Camera;
 
-namespace DeiGratia
+namespace DeiGratia.src
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        Camera2D camera = new Camera2D();
+
+        private MapManager mapManager;
+        TileMapRenderer tileMapRenderer;
 
         public Game1()
         {
@@ -20,12 +30,19 @@ namespace DeiGratia
         {
             // TODO: Add your initialization logic here
 
+            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2;
+            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
+            _graphics.ApplyChanges();
+
+            mapManager = new MapManager(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            tileMapRenderer = new TileMapRenderer(mapManager.Map, _spriteBatch, this.Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -37,6 +54,8 @@ namespace DeiGratia
 
             // TODO: Add your update logic here
 
+            camera.Position = new Vector2(320f, 320f);
+
             base.Update(gameTime);
         }
 
@@ -45,6 +64,9 @@ namespace DeiGratia
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.get_transformation(_graphics.GraphicsDevice));
+            tileMapRenderer.RenderMap();
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
