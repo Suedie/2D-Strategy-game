@@ -13,8 +13,8 @@ namespace DeiGratia.src.Tilemap
     // TODO: Maybe use factory pattern
     internal class MapManager
     {
-        private TileMap map;
-        private Grid grid;
+        private TileMap _map;
+        private Grid _grid;
 
         public MapManager(String filepath)
         {
@@ -22,8 +22,8 @@ namespace DeiGratia.src.Tilemap
             Grid = new Grid(Map.Width, Map.Height, Map.TileWidth, Map.TileHeight);
         }
 
-        internal TileMap Map { get => map; set => map = value; }
-        internal Grid Grid { get => grid; set => grid = value; }
+        internal TileMap Map { get => _map; set => _map = value; }
+        internal Grid Grid { get => _grid; set => _grid = value; }
 
         public void LoadMap(String filepath)
         {

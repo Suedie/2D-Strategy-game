@@ -8,27 +8,27 @@ namespace DeiGratia.src.Tilemap
 {
     internal class Grid
     {
-        private int width;
-        private int height;
-        private int tileWidth;
-        private int tileHeight;
+        private int _width;
+        private int _height;
+        private int _tileWidth;
+        private int _tileHeight;
 
         public Grid(int width, int height, int tileWidth, int tileHeight)
         {
-            this.width = width;
-            this.height = height;
-            this.tileWidth = tileWidth;
-            this.tileHeight = tileHeight;
+            this._width = width;
+            this._height = height;
+            this._tileWidth = tileWidth;
+            this._tileHeight = tileHeight;
         }
 
-        public int setX(int x)
+        public int SetX(int x)
         {
-            return x + tileWidth;
+            return x + _tileWidth;
         }
 
-        public int setY(int y)
+        public int SetY(int y)
         {
-            return y + tileHeight;
+            return y + _tileHeight;
         }
     }
 }

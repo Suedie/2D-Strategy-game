@@ -7,14 +7,14 @@ namespace DeiGratia.src.Tilemap
 {
     internal class TmxLoader
     {
-        private XmlDocument tmxFile = new XmlDocument();
+        private XmlDocument _tmxFile = new XmlDocument();
 
         public TmxLoader()
         {
 
         }
 
-        public XmlDocument TmxFile { get => tmxFile; set => tmxFile = value; }
+        public XmlDocument TmxFile { get => _tmxFile; set => _tmxFile = value; }
 
         //Converts a .tmx map into a C# object
         public TileMap LoadMap(string filepath)

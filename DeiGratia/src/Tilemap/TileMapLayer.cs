@@ -8,18 +8,18 @@ namespace DeiGratia.src.Tilemap
 {
     internal class TileMapLayer
     {
-        private int id;
-        private string layerName;
-        private int width;
-        private int height;
+        private int _id;
+        private string _layerName;
+        private int _width;
+        private int _height;
 
-        private int[] tiles;
+        private int[] _tiles;
 
-        public int Id { get => id; set => id = value; }
-        public string LayerName { get => layerName; set => layerName = value; }
-        public int Width { get => width; set => width = value; }
-        public int Height { get => height; set => height = value; }
-        public int[] Tiles { get => tiles; set => tiles = value; }
+        public int Id { get => _id; set => _id = value; }
+        public string LayerName { get => _layerName; set => _layerName = value; }
+        public int Width { get => _width; set => _width = value; }
+        public int Height { get => _height; set => _height = value; }
+        public int[] Tiles { get => _tiles; set => _tiles = value; }
 
         public TileMapLayer(int id, string layerName, int width, int height, int[] tiles)
         {

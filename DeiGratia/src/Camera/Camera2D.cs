@@ -10,47 +10,47 @@ namespace DeiGratia.src.Camera
 {
     internal class Camera2D
     {
-        private float zoom;
-        private float rotation;
-        public Matrix transform;
-        private Vector2 position;
+        private float _zoom;
+        private float _rotation;
+        public Matrix Transform;
+        private Vector2 _position;
 
-        public Vector2 Position { get => position; set => position = value; }
-        public float Zoom
+        public Vector2 Position { get => _position; set => _position = value; }
+        private float Zoom
         {
-            get { return zoom; }
-            set { zoom = value; if (zoom < 0.1f) zoom = 0.1f; } // Negative zoom will flip image
+            get => _zoom;
+            set { _zoom = value; if (_zoom < 0.1f) _zoom = 0.1f; } // Negative zoom will flip image
         }
 
         //Rotation will not be used in this project
-        public float Rotation
+        private float Rotation
         {
-            get { return rotation; }
-            set { rotation = value; }
+            get => _rotation;
+            set => _rotation = value;
         }
 
         public Camera2D()
         {
             Zoom = 1.0f;
-            position = Vector2.Zero;
+            _position = Vector2.Zero;
             Rotation = 0.0f;
         }
 
-        public void move(Vector2 amount)
+        public void Move(Vector2 amount)
         {
-            position += amount;
+            _position += amount;
         }
 
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice)
         {
             Viewport viewport = graphicsDevice.Viewport;
-            transform =
+            Transform =
               Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
                                          Matrix.CreateRotationZ(Rotation) *
                                          Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                                          Matrix.CreateTranslation(new Vector3(viewport.Width * 0.5f, viewport.Height * 0.5f, 0));
-            return transform;
+            return Transform;
         }
     }
 }
