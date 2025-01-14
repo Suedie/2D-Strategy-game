@@ -9,6 +9,8 @@ using System.Xml.Linq;
 
 namespace DeiGratia.src.Tilemap
 {
+    
+    // TODO: Maybe use factory pattern
     internal class MapManager
     {
         private TileMap map;
