@@ -6,6 +6,8 @@ public class PlayerCharacter
 {
 
     private Vector2 _position;
+    private int _healthPoints;
+    private int _movementPoints;
 
     public Vector2 Position { get => _position; set => _position = value; }
 
@@ -18,6 +20,8 @@ public class PlayerCharacter
     {
         _position += amount;
     }
+    
+    
     
     
 }
