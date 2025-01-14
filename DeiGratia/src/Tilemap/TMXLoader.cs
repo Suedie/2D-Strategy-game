@@ -24,12 +24,14 @@ namespace DeiGratia.src.Tilemap
             XmlNodeList tileSetNodes = TmxFile.GetElementsByTagName("tileset");
             XmlAttributeCollection mapAttributes = TmxFile.GetElementsByTagName("map").Item(0).Attributes;
 
+            //Initialised with invalid-default values
             int width = -1;
             int height = -1;
             int tileWidth = -1;
             int tileHeight = -1;
             bool isInfinite = false;
 
+            //Loads attributes from tilemap
             foreach (XmlAttribute mapAttribute in mapAttributes)
             {
                 if (mapAttribute.Name == "width")
@@ -93,6 +95,7 @@ namespace DeiGratia.src.Tilemap
                     }
                 }
 
+                //Each layer only has one child, <data> which contains the id of each tile
                 string[] tileString = layerNode.FirstChild.InnerText.Split(",");
                 int[] tiles = new int[tileString.Length];
 
