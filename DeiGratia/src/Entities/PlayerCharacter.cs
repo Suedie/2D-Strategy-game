@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace DeiGratia.src.Entities;
 
-public class PlayerCharacter
+public class PlayerCharacter : IEntity
 {
 
     private Vector2 _position;
