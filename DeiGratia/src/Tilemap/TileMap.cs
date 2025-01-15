@@ -16,21 +16,15 @@ namespace DeiGratia.src.Tilemap
         private int _tileHeight;
         private bool _infinite;
 
-        public List<TileSet> TileSets
-        {
-            get => _tileSets;
-        }
+        public List<TileSet> TileSets { get; set;}
 
-        public List<TileMapLayer> TileMapLayers
-        {
-            get => _tileMapLayers;
-        }
+        public List<TileMapLayer> TileMapLayers { get; set;}
 
-        public int Width { get => _width; set => _width = value; }
-        public int Height { get => _height; set => _height = value; }
-        public int TileWidth { get => _tileWidth; set => _tileWidth = value; }
-        public int TileHeight { get => _tileHeight; set => _tileHeight = value; }
-        public bool Infinite { get => _infinite; set => _infinite = value; }
+        public int Width { get; set;}
+        public int Height { get; set;}
+        public int TileWidth { get; set;}
+        public int TileHeight { get; set;}
+        public bool Infinite { get; set;}
 
         public TileMap(List<TileSet> tileSets, List<TileMapLayer> tileMapLayers, int width, int height, int tileWidth, int tileHeight, bool infinite)
         {
