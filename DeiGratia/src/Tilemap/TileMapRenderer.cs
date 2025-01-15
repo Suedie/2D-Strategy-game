@@ -34,7 +34,7 @@ namespace DeiGratia.src.Tilemap
                 int[] tiles = layer.Tiles;
                 for (int i = 0; i < tiles.Length; i++)
                 {
-                    DrawTile(tiles[i], i, layer.Width);
+                    DrawTile(tiles[i], i, layer.Width, (float) layer.Id);
                 }
             }
 
@@ -54,7 +54,8 @@ namespace DeiGratia.src.Tilemap
 
         }
 
-        private void DrawTile(int id, int i, int width)
+        //Matches each tile with a corresponding texture and queues a draw call at the appropriate layer
+        private void DrawTile(int id, int i, int width, float depth)
         {
             int drawY = i / width;
             int drawX = i % width;
@@ -70,7 +71,10 @@ namespace DeiGratia.src.Tilemap
                     {
                         if (texture.Name == tileSet.Name)
                         {
-                            _spriteBatch.Draw(texture, new Vector2(drawX * tileSet.TileWidth, drawY * tileSet.TileHeight), new Rectangle(srcX, srcY, tileSet.TileWidth, tileSet.TileHeight), Color.White);
+                            _spriteBatch.Draw(texture, 
+                                new Vector2(drawX * tileSet.TileWidth, drawY * tileSet.TileHeight), 
+                                new Rectangle(srcX, srcY, tileSet.TileWidth, tileSet.TileHeight),
+                                Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth * 0.1f);
                             break;
                         }
                     }
