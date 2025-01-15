@@ -64,8 +64,12 @@ namespace DeiGratia.src
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.get_transformation(_graphics.GraphicsDevice));
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend,
+                null, null, null, null,
+                camera.get_transformation(_graphics.GraphicsDevice));
+            
             tileMapRenderer.RenderMap();
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
