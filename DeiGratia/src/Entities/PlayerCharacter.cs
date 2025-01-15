@@ -8,6 +8,8 @@ public class PlayerCharacter : IEntity
     private Vector2 _position;
     private int _healthPoints;
     private int _movementPoints;
+    
+    public int MovementPoints => _movementPoints;
 
     public Vector2 Position { get => _position; set => _position = value; }
 
