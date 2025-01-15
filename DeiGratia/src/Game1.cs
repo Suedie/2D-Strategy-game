@@ -3,9 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using DeiGratia.src.Tilemap;
 using DeiGratia.src.Camera;
+using DeiGratia.src.Entities;
 
 namespace DeiGratia.src
 {
@@ -14,11 +16,8 @@ namespace DeiGratia.src
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Camera2D camera = new Camera2D();
-
-        private MapManager mapManager;
-        TileMapRenderer tileMapRenderer;
-
+        private Camera2D _camera = new Camera2D();
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -34,15 +33,21 @@ namespace DeiGratia.src
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
             _graphics.ApplyChanges();
 
-            mapManager = new MapManager(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
+            _mapManager = new MapManager(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent + @"/maps/testmap.tmx");
 
             base.Initialize();
         }
 
+        private EntityRenderer _entityRenderer;
+        private MapManager _mapManager;
+        private TileMapRenderer _tileMapRenderer;
+        private IEntity _player = new PlayerCharacter(250, 250);
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileMapRenderer = new TileMapRenderer(mapManager.Map, _spriteBatch, this.Content);
+            _tileMapRenderer = new TileMapRenderer(_mapManager.Map, _spriteBatch, this.Content);
+            _entityRenderer = new EntityRenderer(_player, _spriteBatch, this.Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -51,10 +56,13 @@ namespace DeiGratia.src
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+                _player.Move(new Vector2(-32, 0));
 
             // TODO: Add your update logic here
 
-            camera.Position = new Vector2(320f, 320f);
+            _camera.Position = new Vector2(320f, 320f);
 
             base.Update(gameTime);
         }
@@ -66,9 +74,10 @@ namespace DeiGratia.src
             // TODO: Add your drawing code here
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend,
                 null, null, null, null,
-                camera.get_transformation(_graphics.GraphicsDevice));
+                _camera.get_transformation(_graphics.GraphicsDevice));
             
-            tileMapRenderer.RenderMap();
+            _tileMapRenderer.RenderMap();
+            _entityRenderer.DrawPlayer();
             
             _spriteBatch.End();
 
