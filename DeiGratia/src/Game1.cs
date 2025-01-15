@@ -58,7 +58,7 @@ namespace DeiGratia.src
                 Exit();
             
             if (Keyboard.GetState().IsKeyDown(Keys.A))
-                _player.Move(new Vector2(-32, 0));
+                _player.Move(new Vector2(-32 * (float)gameTime.ElapsedGameTime.TotalSeconds, 0));
 
             // TODO: Add your update logic here
 
