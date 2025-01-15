@@ -41,7 +41,7 @@ namespace DeiGratia.src
         private EntityRenderer _entityRenderer;
         private MapManager _mapManager;
         private TileMapRenderer _tileMapRenderer;
-        private IEntity _player = new PlayerCharacter(250, 250);
+        private IEntity _player = new PlayerCharacter(320, 320);
 
         protected override void LoadContent()
         {
