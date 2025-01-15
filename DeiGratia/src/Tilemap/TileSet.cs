@@ -32,14 +32,14 @@ namespace DeiGratia.src.Tilemap
             _height = height;
         }
 
-        public int Firstgid { get => _firstgid; set => _firstgid = value; }
-        public string Name { get => _name; set => _name = value; }
-        public int TileWidth { get => _tileWidth; set => _tileWidth = value; }
-        public int TileHeight { get => _tileHeight; set => _tileHeight = value; }
-        public int TileCount { get => _tileCount; set => _tileCount = value; }
-        public int Columns { get => _columns; set => _columns = value; }
-        public string Source { get => _source; set => _source = value; }
-        public int Width { get => _width; set => _width = value; }
-        public int Height { get => _height; set => _height = value; }
+        public int Firstgid { get; set;}
+        public string Name { get; set;}
+        public int TileWidth { get; set;}
+        public int TileHeight { get; set;}
+        public int TileCount { get; set;}
+        public int Columns { get; set;}
+        public string Source { get; set;}
+        public int Width { get; set;}
+        public int Height { get; set;}
     }
 }

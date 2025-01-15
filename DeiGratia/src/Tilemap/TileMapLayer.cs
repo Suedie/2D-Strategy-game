@@ -15,11 +15,11 @@ namespace DeiGratia.src.Tilemap
 
         private int[] _tiles;
 
-        public int Id { get => _id; set => _id = value; }
-        public string LayerName { get => _layerName; set => _layerName = value; }
-        public int Width { get => _width; set => _width = value; }
-        public int Height { get => _height; set => _height = value; }
-        public int[] Tiles { get => _tiles; set => _tiles = value; }
+        public int Id { get; set;}
+        public string LayerName { get; set;}
+        public int Width { get; set;}
+        public int Height { get; set;}
+        public int[] Tiles { get; set;}
 
         public TileMapLayer(int id, string layerName, int width, int height, int[] tiles)
         {

@@ -14,15 +14,15 @@ namespace DeiGratia.src.Tilemap
 
         }
 
-        public XmlDocument TmxFile { get => _tmxFile; set => _tmxFile = value; }
+        public XmlDocument TmxFile { get; set;}
 
         //Converts a .tmx map into a C# object
         public TileMap LoadMap(string filepath)
         {
-            TmxFile.Load(filepath);
-            XmlNodeList layerNodes = TmxFile.GetElementsByTagName("layer");
-            XmlNodeList tileSetNodes = TmxFile.GetElementsByTagName("tileset");
-            XmlAttributeCollection mapAttributes = TmxFile.GetElementsByTagName("map").Item(0).Attributes;
+            _tmxFile.Load(filepath);
+            XmlNodeList layerNodes = _tmxFile.GetElementsByTagName("layer");
+            XmlNodeList tileSetNodes = _tmxFile.GetElementsByTagName("tileset");
+            XmlAttributeCollection mapAttributes = _tmxFile.GetElementsByTagName("map").Item(0).Attributes;
 
             //Initialised with invalid-default values
             int width = -1;
