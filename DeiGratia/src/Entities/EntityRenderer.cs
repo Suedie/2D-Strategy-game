@@ -28,9 +28,9 @@ public class EntityRenderer
 
     public void DrawPlayer()
     {
-        _texture = _content.Load<Texture2D>("IDLE");
+        _texture = _content.Load<Texture2D>("MiniCavalierMan");
         _spriteBatch.Draw(_texture, _player.Position,
-            new Rectangle(32, 28, 32, 32), Color.White, 0f, Vector2.Zero,
+            new Rectangle(0, 0, 32, 32), Color.White, 0f, Vector2.Zero,
             1f, SpriteEffects.None, 0.3f);
     }
     
