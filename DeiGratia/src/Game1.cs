@@ -17,6 +17,10 @@ namespace DeiGratia.src
         private SpriteBatch _spriteBatch;
 
         private Camera2D _camera = new Camera2D();
+        private EntityRenderer _entityRenderer;
+        private MapManager _mapManager;
+        private TileMapRenderer _tileMapRenderer;
+        private IEntity _player = new PlayerCharacter(320, 320);
         
         public Game1()
         {
@@ -37,11 +41,6 @@ namespace DeiGratia.src
 
             base.Initialize();
         }
-
-        private EntityRenderer _entityRenderer;
-        private MapManager _mapManager;
-        private TileMapRenderer _tileMapRenderer;
-        private IEntity _player = new PlayerCharacter(320, 320);
 
         protected override void LoadContent()
         {
