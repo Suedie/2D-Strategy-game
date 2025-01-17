@@ -10,9 +10,9 @@ public class PlayerCharacter : IEntity
     private int _movementPoints;
     private CharacterState _state;
     
-    public int MovementPoints { get; set;}
+    public int MovementPoints => _movementPoints;
 
-    public Vector2 Position { get; set;}
+    public Vector2 Position { get => _position; set => _position = value; }
 
     public PlayerCharacter(int x, int y)
     {
