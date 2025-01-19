@@ -76,7 +76,7 @@ namespace DeiGratia.src
                 _camera.get_transformation(_graphics.GraphicsDevice));
             
             _tileMapRenderer.RenderMap();
-            _entityRenderer.DrawPlayer();
+            _entityRenderer.DrawPlayer(gameTime);
             
             _spriteBatch.End();
 
