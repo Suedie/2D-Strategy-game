@@ -20,7 +20,7 @@ namespace DeiGratia.src
         private EntityRenderer _entityRenderer;
         private MapManager _mapManager;
         private TileMapRenderer _tileMapRenderer;
-        private IEntity _player = new PlayerCharacter(320, 320);
+        private IEntity _player = new Cavalier(320, 320);
         
         public Game1()
         {
